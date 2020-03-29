@@ -17,7 +17,7 @@ Ours asks for:
 
 Get the **Share URL** for the form by clicking **Send** and the **Link** icon:
 
-![image](https://user-images.githubusercontent.com/5924/77241138-67023900-6bab-11ea-8322-17c7009f3891.png)
+![image](assets/google_form.jpg)
 
 Put this in the **configuration** section of `index.html` as the value of `REGISTER_FORM_URL`.
 
