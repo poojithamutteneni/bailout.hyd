@@ -1,4 +1,4 @@
-# socialnet.hyd
+# socialnet.hyd (https://yashincontrol.github.io/socialnet.hyd/)
 
 ## 1. Fork this repo on github
 
