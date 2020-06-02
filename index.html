@@ -1,12 +1,13 @@
+<!DOCTYPE html>  
+<html>  
 <head>
   <script>
     /* Warning: all the code on this page is very sloppy! caveat emptor */
     /* configuration */
 
     var SPREADSHEET_ID = '15WLpvYAR7v9-kw9ELaQIMribnn49qbgWZTDodYLcjXw';
-    var REGISTER_FORM_URL =
-      'https://forms.gle/2npmZpxuL9bRv5bu6';
-    var GOOGLE_ANALYTICS_ID = 'UA-161542621-1';
+    var REGISTER_FORM_URL = 'https://forms.gle/2npmZpxuL9bRv5bu6';
+     var GOOGLE_ANALYTICS_ID = 'UA-161542621-1';
     var FULL_STORY_ORG = 'SW787';
     var FULL_STORY_NAMESPACE = 'FS';
   </script>
@@ -92,6 +93,7 @@
       g._v = '1.2.0';
     })(window, document, window['_fs_namespace'], 'script', 'user');
 
+    
     /****************************************/
     /* site scripts */
     /****************************************/
@@ -134,7 +136,7 @@
         '1': 'business_name',
         '2': 'location',
         '3': 'description',
-        '4': 'gofundme_url',
+        '4': 'ketto_url',
       };
       var rows = [];
       result.feed.entry.map(e => {
@@ -169,43 +171,25 @@
         .map((row, i) => {
           let outer = document.createElement('div');
           outer.className = `place_pill`;
-          ['business_name', 'location', 'venmo_handle', 'description', 'gofundme_url'].map(k => {
+          ['business_name', 'location', 'web_handle', 'description', 'ketto_url'].map(k => {
             let div = document.createElement('div');
             div.className = `div_content_${k}`;
             div.id = `business_${i}_${k}`;
 
-            //https://venmo.com/iqram?txn=pay&amount=0.01&note=Hii,%20I%20worked%20with%20John%20on%20Venmo,%20and%20he%20wants%20to%20hear%20your%20voice.%20Listen%20to%20this%20Ense%20he%20made:%20https://ense.nyc/ense/154602/violetredyellow
 
-            if (k == 'venmo_handle') {
-              if (row[k] == null && row['gofundme_url'] != null) {
-                //GofundMe
+            if (k == 'web_handle') {
+              if (row[k] == null && row['ketto_url'] != null) {
+                //ketto
                 div.innerHTML =
-                  "<div class='gofundme_pill'><a target='_blank' href='" +
-                  row['gofundme_url'] +
-                  '\' onClick=\'sendGAEvent("send", "event", "GoFundMe Buttons", "Clicked individual business", "' +
-                  row['gofundme_url'] +
+                  "<div class='ketto_pill'><a target='_blank' href='" +
+                  row['ketto_url'] +
+                  '\' onClick=\'sendGAEvent("send", "event", "ketto Buttons", "Clicked individual business", "' +
+                  row['ketto_url'] +
                   '", "' +
                   i +
-                  "\");'><img src='./assets/gofundmelogo_transparent.png' width='86px;'/>" +
+                  "\");'><img src='./assets/kettologo.jpg' width='70px;'/>" +
                   '</a></div>';
-              } else {
-                let venmo_username = (row[k] || '').replace(/[@\s]/g, '');
-                //Venmo
-                let venmo_link =
-                  'https://venmo.com/' +
-                  row[k] +
-                  '?txn=pay&note=Support%20local%20service%20workers%20on%20http://bailout.nyc%20%E2%9D%A4%EF%B8%8F';
-                div.innerHTML =
-                  "<div class='venmo_pill'><a target='_blank' href='" +
-                  venmo_link +
-                  '\' onClick=\'sendGAEvent("send", "event", "Venmo Buttons", "Clicked individual business", "' +
-                  venmo_username +
-                  '", "' +
-                  i +
-                  "\");'><img src='./assets/venmo-transparent.png' width='25px;'/>Venmo @" +
-                  venmo_username +
-                  '</a></div>';
-              }
+              } 
             } else if (k == 'business_name' || k == 'location') {
               div.textContent = row[k];
             } else if (k == 'description') {
@@ -260,12 +244,11 @@
     };
   </script>
 
-  <title>bailout.hyd</title>
-  <meta property="og:image" content="./assets/bailoutlogo.png" />
+  <title>socialnet.hyd</title>
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://bailout.hyd" />
-  <meta property="og:title" content="bailout.hyd" />
-  <meta property="og:description" content="bailout.hyd is a citizen-organized fund to help provide financial relief for service workers whose businesses have closed in response to covid-19." />
+  <meta property="og:url" content="http://socialnet.hyd" />
+  <meta property="og:title" content="socialnet.hyd" />
+  <meta property="og:description" content="socialnet.hyd is a citizen-organized fund to help provide financial relief for service workers whose businesses have closed in response to covid-19." />
   <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
@@ -303,10 +286,10 @@
     }
     body {
       font-family: 'Lato', sans-serif;
-      background-color: #dae5f2;
+      background-color: black;
     }
     .nav {
-      text-align: center;
+
       padding: 4px;
       font-size: 14px;
     }
@@ -333,11 +316,11 @@
       font-size: 1em;
       padding: 1em 2em;
       width: 100%;
-      max-width: 462px;
+
     }
 
     .cta-button {
-      background-color: #123456;
+      background-color: #12345;
       color: #f1faee !important;
     }
 
@@ -352,7 +335,7 @@
 
     .button_new a {
       text-decoration: none;
-      background: #123456;
+      background: black;
       border: none;
       padding: 18px;
       border-radius: 4px;
@@ -366,12 +349,13 @@
     }
 
     #business_flex {
+      margin-left: 0px;
       margin-top: 20px;
       display: flex;
       flex-direction: row;
     }
     #search_icon {
-      color: inherit;
+      color: white;
       font-weight: bold;
       padding-right: 5px;
     }
@@ -386,11 +370,11 @@
       border: none;
       background: transparent;
       border-bottom: 1px solid #333;
-      color: #333;
+      color: white;
       outline: none;
     }
     #search::placeholder {
-      color: #333;
+      color: white;
     }
     .flex_item {
       flex-basis: auto;
@@ -442,14 +426,15 @@
       font-size: 14px;
     }
 
-    .venmo_pill {
+
+    .ketto_pill {
       margin: 20px 0px;
     }
 
-    .venmo_pill a {
+    .ketto_pill a {
       text-decoration: none;
-      background: #6696cc;
-      border: 1px solid #6696cc;
+      background: black;
+      border: 1px solid black;
       padding: 15px;
       border-radius: 4px;
       display: flex;
@@ -457,26 +442,7 @@
       color: white;
     }
 
-    .venmo_pill img {
-      margin-right: 10px;
-    }
-
-    .gofundme_pill {
-      margin: 20px 0px;
-    }
-
-    .gofundme_pill a {
-      text-decoration: none;
-      background: rgb(0, 195, 103);
-      border: 1px solid rgb(0, 195, 103);
-      padding: 15px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-
-    .gofundme_pill img {
+    .ketto_pill img {
       margin-right: 10px;
     }
     ol {
@@ -499,12 +465,58 @@
       line-height: 1.5rem;
       margin-left: -2rem;
     }
+
+    .fixed-header{
+        width: 100%;
+        position: fixed;
+        background: #333;
+        padding: 10px 0;
+        color: #fff;
+    }
+    .fixed-footer{
+
+        clear: both;
+      position: relative;
+        height: 200px;
+       margin-top: -50px;
+        background: #333;
+        padding: 20px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }
+    .container{
+        width: 80%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    nav a{
+        color: #fff;
+        text-decoration: none;
+        padding: 6px 25px;
+        display: inline-block;
+        margin-left:37px;
+    }
+    .logo{
+      font-size:26px;
+
+
+    }
+
   </style>
 </head>
 
 <body onload="onBodyLoad();">
-  <a name="home"></a>
-  <div class="nav nav-top center mw7">
+<nav>
+  <div class="fixed-header">
+      <div class="container">
+
+    <a><span class="logo">socialnet.hyd ❤️ </span></a>
+
+
     <a
       href="#home"
       onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked home', 'From top', '0')"
@@ -515,24 +527,8 @@
       onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked businesses', 'From top', '0')"
       >Businesses</a
     >
-    <a
-      target="_blank"
-      href="http://venmo.com/bailoutnyc"
-      onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Venmo', 'From top', '0')"
-      >Venmo</a
-    >
-    <a
-      target="_blank"
-      href="http://instagram.com/bailoutnyc"
-      onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Instagram', 'From top', '0')"
-      >Instagram</a
-    >
-    <a
-      target="_blank"
-      href="http://twitter.com/bailoutnyc"
-      onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Twitter', 'From top', '0')"
-      >Twitter</a
-    >
+
+
     <a
       href="#about-us"
       onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked whos behind this', 'From top', '0')"
@@ -540,115 +536,96 @@
     >
     <a
       target="_blank"
-      href="https://github.com/kortina/bailout-nyc"
+      href="https://github.com/yashincontrol/socialnet.hyd"
       onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Github', 'From top', '0')"
-      >Fork on Github</a
-    >
+      >Fork on Github</a >
+
+
   </div>
+  </nav>
 
   <div class="mw7 ph4 center">
     <div style="border-bottom:1px #6696CC solid; padding:10px; padding-bottom:26px;">
-      <div style="font-size:30px; margin-top:40px; font-weight:bold">bailout.hyd ❤️</div>
+
     </div>
-
+    <br></br>    <br></br>    <br></br>
     <div class="fl w-100 pa2">
-      <h1 style="font-size:36px;">
-        Help Service Workers
-      </h1>
-      <h1 class="f4 measure">
-        Many are in financial distress due to Covid-19 business closures.
-      </h1>
-    </div>
+      <h1 style="font-size:36px; color:white;">
+        Help Small Businesses
+             </h1>
+                 <h1 style="font-size:22px; color:white;">
+             <h1 class="f4 measure">
+                  <h1 style="font-size:22px; color:white;">
+               Many Shopkeepers and staff workers are in financial distress due to Covid-19 Lockdown.
+             </h1>
+           </div>
 
-    <div class="fl w-100 pa2">
-      <div class="bg-white br1 pa3" style="border-radius:4px;">
-        <h3 class="f4 measure-narrow mt0">
-          Service Workers Need Help
-        </h3>
-        With businesses closing in response to Covid-19, many service workers have suddenly lost a
-        reliable income. To support them, Venmo @bailoutnyc. We'll distribute 100% of the money
-        raised to the Venmo accounts of the registered businesses listed below, so they can send it
-        to their staff.
+           <div class="fl w-100 pa2">
+             <div class="bg-white br1 pa3" style="border-radius:4px;">
+               <h3 class="f4 measure-narrow mt0">
+                 Small Businesses Need Help
+               </h3>
+               As India and countries all around the world are under lockdown in response to COVID-19, small businesses are among the worst hit. Shopkeepers and staff workers have suddenly lost a reliable income. Our small businesses need us now more than ever. Even though we cant leave home, we could still support local businesses through donations.
 
-        <br />
-        <br />
-        If you'd like to support the staff of a particular business, you can also find them below
-        and contribute to them directly. <br />
-        <br />
-        <div id="tell_me_more_header">
-          <a
-            href=""
-            onClick="showTellMeMore(); sendGAEvent('send', 'event', 'Tell me more', 'Clicked tell me more', '0', '0'); return false;"
-            >Tell me more...</a
-          >
-        </div>
-        <div id="tell_me_more" style="display:none">
-          <p>
-            In order to slow the spread of the coronavirus, the local government is
-            <a
-              target="_blank"
-              href="https://www1.nyc.gov/site/doh/health/health-topics/coronavirus.page"
-              >advising</a
-            >
-            restaurants, bars, cafes, nightclubs, movie theaters, small theater houses, and concert
-            venues to close. Elsewhere closures are even more comprehensive.
-          </p>
-          <p>
-            While this is prudent from a public health perspective, these closures will have a real
-            and immediate economic impact to service workers across industries. It could mean missed
-            rent or inability to pay for basic needs for many.
-          </p>
-          <p>
-            The city recognizes the economic stress this will put on service workers, and, in order
-            to incentivize businesses to keep employees on payroll, the administration has announced
-            that "businesses with fewer than 100 employees could be eligible for an interest-free
-            loan up to $75,000 as long as they can document a 25% loss in customer receipts because
-            of the coronavirus."
-          </p>
-          <p>
-            While an interest free loan is a good place to start, we believe we can do more to help
-            those affected, and are raising funds to be distributed to all the businesses affected
-            by this public health crisis.
-          </p>
-          <p>
-            The economic impacts of the coronavirus will be comparable to a very severe recession --
-            some economists estimate direct output loss of 30% for a fiscal quarter, which would
-            equate to an annual GDP loss of 7.5%.
-          </p>
-          <p>
-            Hopefully, we can anticipate the second order consequences of the coronavirus and
-            proactively work to mitigate them more swiftly than we have addressed the public health
-            concerns.
-          </p>
-          <p>
-            We cannot all be working alongside all of the heroic healthcare workers testing and
-            treating coronavirus patients, but our goal with this project is to enable every citizen
-            to do something today to mitigate the economic impact suffered by a huge number of
-            service workers.
-          </p>
-        </div>
+               <br />
+               <br />
+               If you'd like to support the staff of a particular small business, you can find them below
+               and contribute to them directly. <br />
+               <br />
+               <div id="tell_me_more_header">
+                 <a
+                   href=""
+                   onClick="showTellMeMore(); sendGAEvent('send', 'event', 'Tell me more', 'Clicked tell me more', '0', '0'); return false;"
+                   >Tell me more...</a
+                 >
+               </div>
+               <div id="tell_me_more" style="display:none">
+                 <p>
+                   India has entered a 21 day lockdown on the midnight of March 25 in order to halt the spread of the coronavirus. Several other countries aroud the world have taken up similar measures. While this is prudent from a public health perspective, these closures will have a real and immediate economic impact to service workers across industries.
+                 </p>
+                 <p>
+                   Restaurants have tons of fixed costs: rent, labor, loan repayments, insurance, supplies, repairs – the list goes on. Even successful restaurants have razor thin margins of 3-5%, and a third have struggled to pay employees at least once. The “shelter-in-place” ordinance keeping customers at home could tip the balance into bankruptcy.
+                 </p>
+                 <p>
+                   Barclays said the cumulative shutdown cost will be around $120 billion, or 4 per cent of GDP. Of this $120 billion, the new shutdown assumptions account for roughly $90 billion of additional impact. “This would roughly translate to around 2 percentage points of a loss in output, and as a result, we are shaving down our CY2020 GDP forecast from 4.5 per cent to 2.5 per cent and FY20-21 forecast to 3.5 per cent from 5.2 per cent earlier,” it said.
+                 </p>
+                 <p>
+                   India announced an economic stimulus package worth 1.7 trillion rupees ($22.5 billion) on March 26, designed to help millions of low-income households cope with a 21-day lockdown due to the coronavirus outbreak. The package will be disbursed through food security measures for poor households and through direct cash transfers, said India’s Finance Minister Nirmala Sitharaman.
+                 </p>
+                 <p>
+                   While the government is doing its best to help, we believe we can do more to help
+                   those affected, and are raising funds to be distributed to all the businesses affected
+                   by this public health crisis.
+                 </p>
+                 <p>
+                   We cannot all be working alongside all of the heroic healthcare workers testing and
+                   treating coronavirus patients, but our goal with this project is to enable every citizen
+                   to do something today to mitigate the economic impact suffered by a huge number of
+                   service workers.
+                 </p>
+               </div>
 
-        <br />
-      </div>
-      <div
-        class="bg-white br1 pa3"
-        style="border-radius:4px; margin-top:20px; margin-bottom: 15px;"
-      >
-        <h3 class="f4 measure-narrow mt0">
-          Add a Business
-        </h3>
-        Tell your favorite local businesses to register on bailout.hyd so we can all support their
-        staff.<br /><br />
-        If you own or operate a business affected by Covid-19,
-        <a
-          id="register_business_link"
-          style="font-weight:900;"
-          target="_blank"
-          href=""
-          onClick="sendGAEvent('send', 'event', 'Businesses', 'Clicked form link', '0', '0')"
-          >fill out this form</a
-        >
-        to register your business for listing + relief.
+               <br />
+             </div>
+             <div
+               class="bg-white br1 pa3"
+               style="border-radius:4px; margin-top:20px; margin-bottom: 15px;"
+             >
+               <h3 class="f4 measure-narrow mt0">
+                 Add a Business
+               </h3>
+               Tell your favorite local businesses to register on socialnet.hyd so we can all support their
+               staff.<br /><br />
+               If you own or operate a business affected by Covid-19,
+               <a
+                 id="register_business_link"
+                 style="font-weight:900;"
+                 target="_blank"
+                 href=""
+                 onClick="sendGAEvent('send', 'event', 'Businesses', 'Clicked form link', '0', '0')"
+                 >fill out this form</a
+               >
+               to register your business for listing + relief. Businesses have a choice to register for Donation only or Donation+Discount which would allow the contributers to avail a discount of 50% of the amount donated. We believe that this would encourage more people to donate as they would be getting a discount in return when the store opens after the lockdown.
         <script>
           document.getElementById('register_business_link').href = REGISTER_FORM_URL;
         </script>
@@ -672,70 +649,34 @@
       </div>
       <div id="sheet" style="margin-bottom:15px;"></div>
     </div>
+</div>
 
+<div class="fixed-footer">
     <div style="text-align:center;">
-      <a name="about-us" style="font-size:16px; color:inherit;">About Us</a>
+      <a name="about-us" style="font-size:22px; color:inherit;">About Us</a>
       <div
-        style="font-size:12px; margin-top:12px; margin-bottom:25px; margin-left:10px; margin-right:10px; text-align: center;"
+        style="font-size:12px; margin-top:10px; margin-bottom:15px; margin-left:15px; margin-right:15px; text-align: center;"
       >
-        <div style="max-width:410px; margin:0 auto;">
-          We are a group of friends who are computer science students. We built bailout.hyd to help people support
+        <p style="max-width:410px; margin:0 auto;">
+          We are siblings who are computer science students. We built socialnet.hyd to help people support
           each other, especially in times like these.
-        </div>
+        </p>
         <br /><br />
         ❤️<br />
-        Yashasvi Mutteneni - CS Student at JNTUH <br />
-        Poojitha Mutteneni - CS Student at JNTUH <br />
-        Vineeth Chary - CS Student at JNTUH<br />
-        V. Kodanda Ram - CS Student at JNTUH<br />
-        
+        Yashasvi Mutteneni - CS Student at JNT Univerity, Hyderabad, India <br />
+        Poojitha Mutteneni - CS Student at JNT University, Hyderabad, India <br />
+       
+
       </div>
     </div>
-    <div class="nav nav-bottom center mw7">
-      <a
-        href="#home"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked home', 'From bottom', '0')"
-        >Home</a
-      >
-      <a
-        href="#businesses"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked businesses', 'From bottom', '0')"
-        >Businesses</a
-      >
-      <a
-        target="_blank"
-        href="http://venmo.com/bailoutnyc"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Venmo', 'From bottom', '0')"
-        >Venmo</a
-      >
-      <a
-        target="_blank"
-        href="http://instagram.com/bailoutnyc"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Instagram', 'From bottom', '0')"
-        >Instagram</a
-      >
-      <a
-        target="_blank"
-        href="http://twitter.com/bailoutnyc"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Twitter', 'From bottom', '0')"
-        >Twitter</a
-      >
-      <a
-        href="#about-us"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked whos behind this', 'From bottom', '0')"
-        >About Us</a
-      >
-      <a
-        target="_blank"
-        href="https://github.com/kortina/bailout-nyc"
-        onClick="sendGAEvent('send', 'event', 'Header Links', 'Clicked Github', 'From bottom', '0')"
-        >Fork on Github</a
-      >
-    </div>
+
   </div>
+
+
 
   <script
     type="text/javascript"
     src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
   ></script>
 </body>
+</html>
